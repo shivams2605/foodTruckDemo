@@ -8,9 +8,9 @@
 			margin:15px;
 		}
 	</style>
+ 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<div id="display-box" class="display-box"></div>
 <button onClick="addDish()">Add Dish</button>
 <button onClick="getDishes()">Get All Dishes</button>
 <button onClick="getDishesByName()">Get Dish by name</button>
@@ -19,6 +19,7 @@
 <button onClick="updateDishes()">update Dish by name</button>
 <button onClick="deleteDishes()">Delete Dish by name</button>
 <button onClick="addReview()">Add Review</button>
+<div id="display-box" class="display-box"></div>
 
 <script>
 function printData(data){
@@ -46,84 +47,64 @@ function printData(data){
 	document.getElementById('display-box').innerHTML += regeStr;
 }
 function addDish(){
-	let request = new XMLHttpRequest()
-	request.open("POST","https://food-truck-dummy-api.herokuapp.com/addDishes");
-	request.send(JSON.stringify({"name" : "BFC", "category": "Non Veg", "type": "Dessert"}));
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
+	let name = prompt("Name");
+	let category = prompt("Category");
+	let type = prompt("Type");
+	axios({
+		method: 'post',
+		url:"https://food-truck-dummy-api.herokuapp.com/addDishes",
+		data:{
+			"name":name,
+			"category": category,
+			"type":type
 		}
-	}
+	})
 }
 function getDishes(){
-	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/adddishes");
-	request.send();
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
-		}
-	}
+	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes").then(request=>printData(request.data))
 }
 function getDishesByName(){
-	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/dishes");
-	request.send();
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
-		}
-	}
+	let name = prompt("Name");
+	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/name/"+name).then(request=>printData(request.data))
 }
 function getDishesByCategory(){
-	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/dishes");
-	request.send();
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
-		}
-	}
+	let category = prompt("Category");
+	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/category/"+category).then(request=>printData(request.data))
 }
 function getDishesByType(){
-	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/dishes");
-	request.send();
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
-		}
-	}
+	let type = prompt("Type");
+	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/type/"+type).then(request=>printData(request.data))
 }
 function updateDishes(){
-	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/dishes");
-	request.send();
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
+	let name = prompt("Name");
+	let newName = prompt("New Name");
+	let category = prompt("Category");
+	let type = prompt("Type");
+	axios({
+		method: 'post',
+		url:"https://food-truck-dummy-api.herokuapp.com/updateDishes/"+name,
+		data:{
+			"name":newName,
+			"category": category,
+			"type":type
 		}
-	}
+	})
 }
 function deleteDishes(){
-	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/dishes");
-	request.send();
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
-		}
-	}
+	let name = prompt("Name");
+	axios.delete("https://food-truck-dummy-api.herokuapp.com/deleteDishes/"+name)
 }
 function addReview(){
-	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/dishes");
-	request.send();
-	request.onload = () => {
-		if(request.status === 200){
-			printData(request.response);
+	let name = prompt("Name");
+	let review = prompt("Review");
+	axios({
+		method: 'post',
+		url:"https://food-truck-dummy-api.herokuapp.com/addReview",
+		data:{
+			"name":name,
+			"review": review
 		}
-	}
+	})
 }
 </script>
 </body>
