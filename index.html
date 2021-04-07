@@ -14,14 +14,42 @@
 <button onClick="detDishes()">Get Dishes</button>
 
 <script>
-function detDishes(){
+function printData(data){
+	jsonStr = data;
+  regeStr = '',
+    f = {
+            brace: 0
+        }; // for tracking matches, in particular the curly braces
 
+document.getElementById('jsonStr').innerHTML = jsonStr;
+
+regeStr = jsonStr.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function (m, p1) {
+    var rtnFn = function() {
+            return '<div style="text-indent: ' + (f['brace'] * 20) + 'px;">' + p1 + '</div>';
+        },
+        rtnStr = 0;
+    if (p1.lastIndexOf('{') === (p1.length - 1)) {
+        rtnStr = rtnFn();
+        f['brace'] += 1;
+    } else if (p1.indexOf('}') === 0) {
+        f['brace'] -= 1;
+        rtnStr = rtnFn();
+    } else {
+        rtnStr = rtnFn();
+    }
+    return rtnStr;
+});
+
+document.getElementById('display-box').innerHTML += regeStr;
+}
+
+function detDishes(){
 	let request = new XMLHttpRequest()
 	request.open("GET","https://food-truck-dummy-api.herokuapp.com/dishes");
 	request.send();
 	request.onload = () => {
 		if(request.status === 200){
-			document.getElementById("display-box").innerHTML = JSON.parse(request.response)
+			printData(request.response);
 		}
 	}
 }
