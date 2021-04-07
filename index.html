@@ -47,6 +47,16 @@
 	div#display-box div {
 	    padding: 0 15px;
 	}
+	.error {
+	    color: red;
+	    padding: 15px;
+	    display: inline-block;
+	}
+	.success{
+    	color: green;
+	    padding: 15px;
+    	display: inline-block;
+	}
 	</style>
  	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
@@ -101,7 +111,7 @@ function addDish(){
 			"category": category,
 			"type":type
 		}
-	}).then(data => document.getElementById('display-box').innerHTML = data.data.message || "Added Successfully")
+	}).then(data => document.getElementById('display-box').innerHTML = data.data.message? "<span class='error'>"+data.data.message+"</span>" :"<span class='success'>Added Successfully</span>")
     .catch(e => document.getElementById('display-box').innerHTML ="Some Error Occured");
 }
 function getDishes(){
