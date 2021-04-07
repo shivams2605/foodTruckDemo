@@ -112,7 +112,7 @@ function addDish(){
 			"type":type
 		}
 	}).then(data => document.getElementById('display-box').innerHTML = data.data.message? "<span class='error'>"+data.data.message+"</span>" :"<span class='success'>Added Successfully</span>")
-    .catch(e => document.getElementById('display-box').innerHTML ="Some Error Occured");
+    .catch(e => document.getElementById('display-box').innerHTML ="<span class='error'>Some Error Occured</span>");
 }
 function getDishes(){
 	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes").then(request=>printData(request.data))
@@ -142,11 +142,13 @@ function updateDishes(){
 			"category": category,
 			"type":type
 		}
-	})
+	}).then(data => document.getElementById('display-box').innerHTML = data.data.message? "<span class='error'>"+data.data.message+"</span>" :"<span class='success'>Updated Successfully</span>")
+    .catch(e => document.getElementById('display-box').innerHTML ="<span class='error'>Some Error Occured</span>");
 }
 function deleteDishes(){
 	let name = prompt("Name");
-	axios.delete("https://food-truck-dummy-api.herokuapp.com/deleteDishes/"+name)
+	axios.delete("https://food-truck-dummy-api.herokuapp.com/deleteDishes/"+name).then(data => document.getElementById('display-box').innerHTML = data.data.message? "<span class='error'>"+data.data.message+"</span>" :"<span class='success'>Deleted Successfully</span>")
+    .catch(e => document.getElementById('display-box').innerHTML ="<span class='error'>Some Error Occured</span>");
 }
 function addReview(){
 	let name = prompt("Name");
@@ -158,7 +160,8 @@ function addReview(){
 			"name":name,
 			"review": review
 		}
-	})
+	}).then(data => document.getElementById('display-box').innerHTML = data.data.message? "<span class='error'>"+data.data.message+"</span>" :"<span class='success'>Review Added Successfully</span>")
+    .catch(e => document.getElementById('display-box').innerHTML ="<span class='error'>Some Error Occured</span>");
 }
 </script>
 </body>
