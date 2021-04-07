@@ -1,16 +1,50 @@
 <HTML>
 <head>
 	<style>
-		.display-box{
-			min-height:200px;
-			border:1px solid #000;
-			padding:15px;
-			margin:15px;
-		}
+	.display-box {
+	    height: 500px;
+	    border: 1px solid #000;
+	    padding: 15px;
+	    margin: 0px 15px;
+	    overflow: auto;
+	    box-shadow: 0px 0px 20px 0px #000;
+	    z-index: -1;
+	    position: relative;
+	    box-sizing: border-box;
+	}
+	.btn-wrapper,
+	.display-box{
+		margin: 0 auto;
+		width: 1045px;
+	}
+	.btn-wrapper{
+		font-size: 0;
+	}
+	button {
+	    background: #eee;
+	    border: 1px solid #aaa;
+	    padding: 5px 15px;
+	    margin: 0;
+	    border-top-color: #000;
+	    border-bottom: none;
+    	outline: none;
+	}
+	button:first-child {
+	    border-left-color: #000;
+	    border-radius: 5px 0 0 0;
+	}
+	button:last-child {
+        border-right-color: #000;
+	    border-radius: 0 5px 0 0;
+	}
+	button:focus {
+    	background: #ddd;
+	}
 	</style>
  	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
+<div class="btn-wrapper">
 <button onClick="addDish()">Add Dish</button>
 <button onClick="getDishes()">Get All Dishes</button>
 <button onClick="getDishesByName()">Get Dish by name</button>
@@ -19,6 +53,7 @@
 <button onClick="updateDishes()">update Dish by name</button>
 <button onClick="deleteDishes()">Delete Dish by name</button>
 <button onClick="addReview()">Add Review</button>
+</div>
 <div id="display-box" class="display-box"></div>
 
 <script>
