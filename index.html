@@ -101,7 +101,7 @@ function addDish(){
 			"category": category,
 			"type":type
 		}
-	}).then(data => document.getElementById('display-box').innerHTML ="Added Successfully")
+	}).then(data => document.getElementById('display-box').innerHTML = data.message || "Added Successfully")
     .catch(e => document.getElementById('display-box').innerHTML ="Some Error Occured");
 }
 function getDishes(){
