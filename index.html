@@ -79,10 +79,10 @@ function getDishesByType(){
 function updateDishes(){
 	let name = prompt("Name");
 	let newName = prompt("New Name");
-	let category = prompt("Category");
-	let type = prompt("Type");
+	let category = prompt("New Category");
+	let type = prompt("New Type");
 	axios({
-		method: 'post',
+		method: 'put',
 		url:"https://food-truck-dummy-api.herokuapp.com/updateDishes/"+name,
 		data:{
 			"name":newName,
