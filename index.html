@@ -76,6 +76,10 @@
 <script>
 function printData(data){
 	document.getElementById('display-box').innerHTML ="";
+	if(!data.allDishes.length){
+		document.getElementById('display-box').innerHTML = "<span class='error'>No Record Found</span>";
+		return false;
+	}
 	jsonStr = JSON.stringify(data);
 	regeStr = '',
     f = {
@@ -119,15 +123,27 @@ function getDishes(){
 }
 function getDishesByName(){
 	let name = prompt("Name");
-	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/name/"+name).then(request=>printData(request.data))
+	if(name){
+		axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/name/"+name).then(request=>printData(request.data))
+	}else{
+		document.getElementById('display-box').innerHTML = "<span class='error'>Name is Mandatory</span>"
+	}
 }
 function getDishesByCategory(){
 	let category = prompt("Category");
-	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/category/"+category).then(request=>printData(request.data))
+	if(category){
+		axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/category/"+category).then(request=>printData(request.data))
+	}else{
+		document.getElementById('display-box').innerHTML = "<span class='error'>Category is Mandatory</span>"
+	}
 }
 function getDishesByType(){
 	let type = prompt("Type");
-	axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/type/"+type).then(request=>printData(request.data))
+	if(type){
+		axios.get("https://food-truck-dummy-api.herokuapp.com/dishes/type/"+type).then(request=>printData(request.data))
+	}else{
+		document.getElementById('display-box').innerHTML = "<span class='error'>Type is Mandatory</span>"
+	}
 }
 function updateDishes(){
 	let name = prompt("Name");
