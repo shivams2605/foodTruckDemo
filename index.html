@@ -47,7 +47,7 @@ function printData(data){
 }
 function addDish(){
 	let request = new XMLHttpRequest()
-	request.open("POST","https://food-truck-dummy-api.herokuapp.com/dishes");
+	request.open("POST","https://food-truck-dummy-api.herokuapp.com/addDishes");
 	request.send(JSON.stringify({"name" : "BFC", "category": "Non Veg", "type": "Dessert"}));
 	request.onload = () => {
 		if(request.status === 200){
@@ -57,7 +57,7 @@ function addDish(){
 }
 function getDishes(){
 	let request = new XMLHttpRequest()
-	request.open("GET","https://food-truck-dummy-api.herokuapp.com/addDishes");
+	request.open("GET","https://food-truck-dummy-api.herokuapp.com/adddishes");
 	request.send();
 	request.onload = () => {
 		if(request.status === 200){
